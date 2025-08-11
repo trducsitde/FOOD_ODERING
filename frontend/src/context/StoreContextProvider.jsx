@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { food_list } from "../assets/assets"
 import StoreContext from "./StoreContext"
 
@@ -25,9 +25,16 @@ const StoreContextProvider = (props) => {
 		}))
 	}
 
-	useEffect(() => {
-		console.log("Cart items updated:", cartItems)
-	}, [cartItems])
+	const getTotalCart = () => {
+		let totalAmount = 0
+		for (const item in cartItems) {
+			if (cartItems[item] > 0) {
+				let itemInfo = food_list.find((product) => product._id === item)
+				totalAmount += itemInfo.price * cartItems[item]
+			}
+		}
+		return totalAmount
+	}
 
 	const contextValue = {
 		food_list,
@@ -35,6 +42,7 @@ const StoreContextProvider = (props) => {
 		setCartItems,
 		addToCart,
 		removeFromCart,
+		getTotalCart
 	}
 
 	return (
