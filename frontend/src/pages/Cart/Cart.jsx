@@ -3,7 +3,7 @@ import "./Cart.css"
 import StoreContext from "../../context/StoreContext"
 
 const Cart = () => {
-	const { cartItems, food_list, removeFromCart, getTotalCart } =
+	const { cartItems, food_list, removeFromCart, getTotalCart, url } =
 		useContext(StoreContext)
 	return (
 		<div className='cart'>
@@ -24,7 +24,7 @@ const Cart = () => {
 							<div>
 								<div className='cart-item-title cart-items-item'>
 									<img
-										src={item.image}
+										src={url + "/images/" + item.image}
 										alt=''
 									/>
 									<p>{item.name}</p>
